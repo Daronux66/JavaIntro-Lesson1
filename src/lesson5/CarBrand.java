@@ -1,0 +1,14 @@
+package lesson5;
+
+public enum CarBrand {
+	ASTON_MARTIN,
+	RED_BULL,
+	MERCEDES,
+	FERRARI,
+	ALPINE,
+	HASS,
+	ALPHA_ROMEO,
+	ALPHATAURI,
+	WILLIAMS,
+	MCLAREN,
+}
