@@ -4,10 +4,10 @@ public class Car implements Comparable<Car> {
 	private int mileage;
 	private CarBrand brand;
 	private Plate plate;
-
+	private static final int MAX_KM = 320000; 
+	
 	public Car() {
-		int maxKm= 320000;
-		this.mileage = (int) genRand(0, maxKm);
+		this.mileage = (int) genRand(0, MAX_KM);
 		this.brand = genBrand();
 		this.plate = genPlate(genCountry());
 	}
