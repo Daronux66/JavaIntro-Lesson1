@@ -1,73 +1,55 @@
 package lesson2;
 
 public class MultiplicationTable {
-	private int rows, cols, from;
-	private String table;
+	private int r1Down, r1Up, r2Down, r2Up;
+	private int[][] table;
 
-	public MultiplicationTable(int rows, int cols, int from) {
-		this.rows=rows;
-		this.cols=cols;
-		this.from=from;
-		buildTable();
+	public MultiplicationTable(int r1Down, int r1Up, int r2Down, int r2Up) {
+		this.r1Down=r1Down;
+		this.r1Up=r1Up;
+		this.r2Down=r2Down;
+		this.r2Up=r2Up;
+		if(r1Down>r1Up) throw new IllegalArgumentException("Range 1 not valid");
+		if(r2Down>r2Up) throw new IllegalArgumentException("Range 2 not valid");
+		this.table = buildTable();
 	}
 
-	private void buildTable() {
-		StringBuffer table = new StringBuffer();
-		StringBuffer separator = new StringBuffer();
-		int res;
-		for(int i = this.from; i<=this.cols; i++) {
-			if(i == this.from) {
-				table.append("\t|");
+	private int[][] buildTable() {
+		int[][] auxTable= new int[r1Up-r1Down+1][r2Up-r2Down+1];
+		
+		for (int i = 0; i < auxTable.length; i++) {
+			for (int j = 0; j <  auxTable[0].length; j++) {
+				auxTable[i][j] = (i+r1Down)*(j+r2Down);
 			}
-			separator.append("---------");
-			table.append("\t"+i);
 		}
+		return auxTable;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer("| XXXXX\t|");
+		StringBuffer aux = new StringBuffer("--------");
 		
-		table.append("\n"+separator+"\n");
-		//table.append("\n\t|\t\n");
-		
-		for(int i=0;i<=this.rows;i++) {
-			table.append(i+"\t|\t");
-			
-			for(int j=this.from;j<=this.cols;j++) {
-				res=i*j;
-				table.append(res+"\t");
+		for (int i = 0; i < this.table[0].length; i++) {
+			sb.append((i+r2Down)+"\t|");
+			aux.append("--------");
+		}
+		sb.append("\n"+aux.toString()+"\n");
+		for (int i = 0; i < this.table.length; i++) {
+			sb.append("|"+(i+r1Down)+"\t|");
+			for (int j = 0; j < this.table[0].length; j++) {
+				sb.append(table[i][j]+"\t|");
 			}
-			table.append("\n");
+			sb.append("\n");
 		}
-		
-		this.table=table.toString();
+		return sb.toString();
 	}
 
-	public int getRows() {
-		return rows;
-	}
-
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
-
-	public int getCols() {
-		return cols;
-	}
-
-	public void setCols(int cols) {
-		this.cols = cols;
-	}
-
-	public int getFrom() {
-		return from;
-	}
-
-	public void setFrom(int from) {
-		this.from = from;
-	}
-
-	public String getTable() {
+	public int[][] getTable() {
 		return table;
 	}
 
-	public void setTable(String table) {
+	public void setTable(int[][] table) {
 		this.table = table;
 	}
 

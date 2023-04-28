@@ -12,11 +12,16 @@ public class Main {
 		System.out.println("Enter the cols of the matrixes:");
 		int cols=sc.nextInt();
 		
-		System.out.println("Enter the min range of the random values:");
-		int min=sc.nextInt();
+		int min, max;
+		do{
+			System.out.println("Enter the min range of the random values:");
+			min=sc.nextInt();
+			
+			System.out.println("Enter the max range of the random values:");
+			max=sc.nextInt();
+			if(min>max) System.out.println("Random range not valid. Max should be greater than Min");
+		}while(min>max);
 		
-		System.out.println("Enter the max range of the random values:");
-		int max=sc.nextInt();
 		
 		MatrixSum s =  new MatrixSum(rows, cols, max, min);
 		
