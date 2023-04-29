@@ -1,17 +1,23 @@
-package lesson5;
+package lesson6;
 
-public class Car implements Comparable<Car> {
+import lesson5.CarBrand;
+import lesson5.Country;
+import lesson5.Plate;
+
+public abstract class Car2 implements Comparable<Car2> {
 	private int mileage;
 	private CarBrand brand;
 	private Plate plate;
 	private static final int MAX_KM = 320000;
 	
-	public Car() {
+	public Car2() {
 		this.mileage = (int) genRand(0, MAX_KM);
 		this.brand = genBrand();
 		this.plate = genPlate(genCountry());
 	}
 
+	public abstract String getFuel();
+	
 	private Plate genPlate(Country country) {
 		return new Plate(country);
 	}
@@ -94,12 +100,18 @@ public class Car implements Comparable<Car> {
 	}
 
 	@Override
-	public int compareTo(Car c) {
+	public int compareTo(Car2 c) {
 		if (this.getMileage() < c.getMileage())
 			return -1;
 		if (this.getMileage() == c.getMileage())
 			return 0;
 		return 1;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Car properties:\nBrand => "+getBrand()
+				+",\nPlate => "+getPlate().getPlate()+"\nMileage => "
+				+getMileage()+"\nFuel => "+ getFuel();
+	}
 }
